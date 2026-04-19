@@ -1,0 +1,29 @@
+[build]
+  publish = "dist"
+  command = "npm run build"
+
+[headers]
+  [[headers."/*"]]
+    X-Content-Type-Options = "nosniff"
+    X-Frame-Options = "DENY"
+    X-XSS-Protection = "1; mode=block"
+    Referrer-Policy = "no-referrer"
+  [[headers."/ads.txt"]]
+    Cache-Control = "max-age=3600"
+  [[headers."/manifest.json"]]
+    Cache-Control = "max-age=3600"
+  [[headers."/robots.txt"]]
+    Cache-Control = "max-age=3600"
+
+[redirects]
+  [[redirects]]
+    from = "/*"
+    to = "/index.html"
+    status = 200
+    force = true  
+
+[[redirects]]
+  from = "http://*"
+  to = "https://{host}{path}"
+  status = 301
+  force = true
